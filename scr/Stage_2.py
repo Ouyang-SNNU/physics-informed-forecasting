@@ -1,7 +1,3 @@
-"""
-UDE Stage 2 v1 — TCN 架构 + 56 天窗口 + ODE Incidence Fit
-输出: model/{Region}_UDE_S2_v1.pt + figures/UDE_S2_v1_{Region}.png
-"""
 import os
 import numpy as np
 import pandas as pd
@@ -19,7 +15,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
 print(f"CLIMATE_WINDOW = {CLIMATE_WINDOW} days")
 
-# ====================== 训练配置 ======================
+# ====================== Training configuration ======================
 TRAIN_CONFIG = {
     # "Abruzzo":                [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2023, 2024],
     # "Apulia":                 [2011, 2013, 2014, 2015, 2016, 2017, 2018, 2023, 2024],
@@ -44,7 +40,7 @@ EPOCHS = 300
 LR = 1e-4
 VAL_RATIO = 0.2
 
-# ODE 流行病学参数
+# ODE epidemiological parameters
 SIGMA = 0.67
 GAMMA_S = 0.20
 GAMMA_A = 0.33

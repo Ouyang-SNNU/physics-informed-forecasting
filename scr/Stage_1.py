@@ -1,19 +1,3 @@
-"""
-UDE Stage 1 v1 — TCN 架构 + 56 天窗口 β 预测训练
-
-相比 v0 (UDE_S1.py) 的改动:
-  - CLIMATE_WINDOW: 35 → 56 天
-  - 网络: DirectBetaNet → TransNet (TCN head)
-  - 模型保存: {Region}_UDE_S1_v1.pt
-  - 不足窗口警告: 当季节长度 < CLIMATE_WINDOW 时打印警告
-
-保留 v0 逻辑:
-  - 每地区独立训练, 独立 Scaler
-  - 直接 MSE(β_pred, β_pinns) 训练
-  - 20k epochs, lr=1e-3
-
-输出: model/{Region}_UDE_S1_v1.pt + model/scaler_{Region}.pkl
-"""
 import os, glob
 import numpy as np
 import pandas as pd
@@ -31,7 +15,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
 print(f"CLIMATE_WINDOW = {CLIMATE_WINDOW} days")
 
-# ====================== 训练配置 ======================
+# ====================== Training configuration ======================
 TRAIN_CONFIG = {
     # "Abruzzo":                [2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2023, 2024],
     # "Apulia":                 [2011, 2013, 2014, 2015, 2016, 2017, 2018, 2023, 2024],
